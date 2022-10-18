@@ -13,3 +13,24 @@ db.serialize(function () {
     db.run("CREATE TABLE user (username TEXT, password TEXT, title TEXT)");
     db.run("INSERT INTO user VALUES ('privilegedUser', 'privilegedUser1', 'Administrator')");
 });
+
+app.get('/', (req, res) => {
+    res.sendFile('index.html');
+})
+
+app.post('/login', (req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let query = "SELECT title FROM user where username = '" + username + "' and password = '" + password + "'";
+
+    db.get(query, function (err, row) {
+        if (err) {
+            console.log('ERROR', err);
+            res.redirect("/index.html#error");
+        } else {
+            res.send('Hello <b>' + row.title + '!</b><br /> This file contains all your secret data: <br /><br />SECRETS <br /><br /> MORE SECRETS <br /><br /><a href="/index.html">Go back to login</a>');
+        }
+    })
+})
+
+app.listen(3000)
