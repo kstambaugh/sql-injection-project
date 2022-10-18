@@ -12,13 +12,16 @@
 <body>
 
     <form action="/login" method="post">
-        <container>
+        <div class="container">
             <label for="username">username</label>
             <input type="text" id="username" name="username" required>
+
             <label for="password">password</label>
             <input type="text" id="password" name="password" required>
+
             <input type="button" value="submit">
-        </container>
+        </div>
+
         <script>
             if (document.location.hash === '#unauthorized') {
                 document.write('<div class="unauthorized">Invalid Username or Password</div>');
@@ -26,6 +29,7 @@
                 document.write('<div class="error">An error has occured</div>');
             }
         </script>
+
     </form>
 
 </body>
